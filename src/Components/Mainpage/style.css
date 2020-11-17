@@ -1,0 +1,25 @@
+.inputForm {
+    display: inline;
+    position: fixed;
+    max-height: 50%;
+    margin-left: 50vh;
+}
+.inputForm-hide {
+    display: none;
+}
+
+.inputForm input {
+    max-height: 50%;
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+.modal {
+    max-width: 100%;
+    padding: 200px;
+    position: center;
+}
+.modal-hide {
+    display: none;
+}
+
