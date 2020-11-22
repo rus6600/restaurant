@@ -101,7 +101,7 @@ function Kitchen(props) {
         const {name,value} = e.target
         setEditForm (prev => ({
             ...prev,
-        [name]: e.target.value
+        [name]: value
         }))
     }
 

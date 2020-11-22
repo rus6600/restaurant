@@ -67,7 +67,7 @@ function* editRestaurant(action) {
     fm.append('phone', data.phone)
     fm.append('rate', data.rate)
     try {
-        const restaurantResponse = yield axios.put(`http://localhost:5000/api/restaurant/${data.idItem}`, fm).then(res => res.data);
+        const restaurantResponse = yield axios.put(`http://localhost:5000/api/restaurant/${data.id}`, fm).then(res => res.data);
         yield put({type: types.RESTAURANT_ADD_SUCCESS, payload: restaurantResponse});
         yield getRestaurants({data: {query: ``, page: 1}});
 

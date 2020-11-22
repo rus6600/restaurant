@@ -18,13 +18,18 @@ import Mainpage from "./Components/Mainpage";
 import SimpleSlider from "./Components/slider";
 import Slider from "../src/Components/slider/Slider"
 import Mainpage2 from "./Components/Mainpage/mainpage2";
+import setRole from "./utils/setRole";
 
 const store = configureStore()
+console.log(localStorage)
 
-if (localStorage.token) {
+
+if (localStorage.token && localStorage.role) {
     setAuthToken(localStorage.token);
+    setRole(localStorage.role)
     const decoded = jwt_decode(localStorage.token);
-    store.dispatch({type: types.SET_CURRENT_USER, payload: decoded});
+    const userRole = localStorage.role
+    store.dispatch({type: types.SET_CURRENT_USER, payload: decoded, userRole});
     const currentTime = Date.now()/1000;
     if (decoded.exp < currentTime) {
         localStorage.removeItem("token");
@@ -33,6 +38,9 @@ if (localStorage.token) {
         window.location.href = "/signin";
     }
 }
+
+
+
 
 function App() {
   return (

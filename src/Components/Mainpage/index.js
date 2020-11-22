@@ -1,16 +1,17 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom"
-import Slider from "../slider/Slider"
-import {Button, Card, Form, Input, Select, Modal, Upload, message } from "antd";
+import {Button} from "antd";
+import Carousel from 'react-bootstrap/Carousel'
 import App from "../../App";
 import { css } from '@emotion/css'
 import { jsx } from '@emotion/react'
 import {withRouter} from "react-router-dom"
+import { LinkContainer } from 'react-router-bootstrap'
 import {bindActionCreators} from "redux";
 import * as kitchenActions from "../../actions/kitchenActions";
 import {connect} from "react-redux";
 import * as restaurantActions from "../../actions/restaurantActions"
-import "../../Assets/css/superslides.css"
+import * as orderActions from "../../actions/orderActions"
 import "../../Assets/css/animate.css"
 import '../../Assets/css/style.css'
 import '../../Assets/css/bootstrap.min.css'
@@ -20,24 +21,24 @@ import '../../Assets/css/custom.css'
 import '../../Assets/css/responsive.css'
 import '../../Assets/css/classic.time.css'
 import '../../Assets/css/font-awesome.min.css'
-import logo from '../../Assets/images/logo.png'; // with import
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import logo from '../../Assets/images/DECODE-RGB.png'; // with import
 import slider01 from "../../Assets/images/slider-01.jpg"
 import slider02 from "../../Assets/images/slider-02.jpg"
 import slider03 from "../../Assets/images/slider-03.jpg"
 import gallery_img_01 from "../../Assets/images/gallery-img-01.jpg"
-import images from "../slider/images";
-// // import SliderContent from "../slider/SliderContent";
-// // import Slide from "../slider/Slide";
-// // import Arrow from "../slider/Arrow";
-// import Dots from "../slider/Dots";
-// import rightArrow from "../img/right-arrow.svg";
-// import leftArrow from "../img/left-arrow.svg";
-// import SliderCSS from "../slider/Slider"
+
 /** @jsx jsx */
 import SignUp from "../../Containers/signup/index"
+import UserRestaurant from "../../Containers/userInterface/Components/Restaurant/index"
 import ModalCheck from "../Mainpage/modal"
-import modalSignIn from "./modalSignIn";
+import ModalSignIn from "./modalSignIn";
 import * as authActions from "../../actions/authActions";
+import Review from "../../Containers/userInterface/Components/Review";
+import Order from "../../Containers/userInterface/Components/Order/"
+
+
 
 
 function Mainpage(props) {
@@ -48,9 +49,19 @@ const [showSignIn, setShowSignIn] = useState(false);
 
 const handleSignUp = () => setShowSignUp(!showSignUp);
 const handleSignIn = () => setShowSignIn(!showSignIn);
-console.log(props.history)
-console.log(props.isAuth)
 
+
+
+
+
+  const  settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+    //
 
 
 
@@ -59,7 +70,7 @@ console.log(props.isAuth)
 
     <div >
         <ModalCheck showSignUp={showSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn} setShowSignIn={setShowSignIn} setShowSignUp={setShowSignUp}/>
-        <modalSignIn showSignIn={showSignIn} handleSignIn={handleSignIn}  />
+        <ModalSignIn showSignIn={showSignIn} handleSignIn={handleSignIn}/>
 
         <div>
         <header className="top-navbar">
@@ -73,7 +84,16 @@ console.log(props.isAuth)
                 </button>
                 <div className="collapse navbar-collapse" id="navbars-rs-food">
                     <ul className="navbar-nav ml-auto">
+
+                        <LinkContainer to="/">
                         <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
+                        </LinkContainer>
+
+
+
+
+
+
                         <li className="nav-item"><a className="nav-link" href="menu.html">Menu</a></li>
                         <li className="nav-item"><a className="nav-link" href="about.html">About</a></li>
                         <li className="nav-item dropdown">
@@ -84,27 +104,100 @@ console.log(props.isAuth)
                                 <a className="dropdown-item" href="gallery.html">Gallery</a>
                             </div>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
-                            <div className="dropdown-menu" aria-labelledby="dropdown-a">
-                                <a className="dropdown-item" href="blog.html">blog</a>
-                                <a className="dropdown-item" href="blog-details.html">blog Single</a>
-                            </div>
-                        </li>
+
+                        <LinkContainer to="/dashboard">
+                            <li className={ props.role  === "admin" ? "nav-item active" : "hide"}><a className={ props.role === "admin" ? "nav-link" : "hide"} >Dashboard</a></li>
+                        </LinkContainer>
+
+                        { props.isAuth ?
+                            <li className="nav-item"><a className="nav-link" onClick={() => props.authActions.signOut()}>Sign Out</a></li>
+                            :
+                            <li className="nav-item"><a className="nav-link" onClick={() => handleSignUp()}>Sign In</a></li>
+                        }
                         <li>
 
-                        {props.isAuth ? <Button variant="light" onClick={() => handleSignUp()}>
-                            Sign Up
-                        </Button> : <Button onClick={() => props.authActions.signOut()}>Sign Out</Button>}
 
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header>git
+    </header>
 
-            <Slider images={images} />
+            <Carousel>
+                <Carousel.Item style={{maxHeight: "100vh"}}>
+                    <img
+                        className="d-block w-100 h-100"
+                        src={slider01}
+                        text="First slide"
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item style={{maxHeight: "100vh"}}>
+                    <img
+                        className="d-block w-100"
+                        src={slider02}
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item style={{maxHeight: "100vh"}}>
+                    <img
+                        className="d-block w-100"
+                        src={slider03}
+                        alt="Third slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+
+            <div className="slider-box">
+            <div className="container" >
+                <div className="row ">
+                    <div className="col-lg-4 col-md-4 col-sm-12 text-center " >
+
+                                <UserRestaurant/>
+
+                    </div>
+
+                    <div className="col-lg-4 col-md-4 col-sm-12 text-center">
+
+                        <Review/>
+
+                    </div>
+
+                    <div className="col-lg-4 col-md-4 col-sm-12 text-center">
+
+                        <Order/>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            </div>
+
+
+
+
+
+
+
+
+
 
     <div className="about-section-box">
         <div className="container">
@@ -581,15 +674,16 @@ const mapStateToProps = state => ({
     isLoading: state.kitchen.isLoading,
     kitchens: state.kitchen.kitchens,
     restaurant: state.restaurant.restaurant,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    role: state.auth.role
 
 })
 
 const mapDispatchToProps = dispatch => ({
     restaurantActions: bindActionCreators(restaurantActions, dispatch),
     kitchenActions: bindActionCreators(kitchenActions, dispatch),
-    authActions: bindActionCreators(authActions, dispatch)
-
+    authActions: bindActionCreators(authActions, dispatch),
+    orderActions: bindActionCreators(orderActions, dispatch)
 
 })
 

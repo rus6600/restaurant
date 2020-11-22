@@ -10,6 +10,8 @@ import {connect} from "react-redux";
 import Restaurant from "../restaurant";
 import ShowRestaurant from "../restaurant/showRestaurant";
 import Kitchen from "../kitchen";
+import { LinkContainer } from 'react-router-bootstrap'
+
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -33,30 +35,35 @@ const closeSession = (values) => {
 
 
 return (
-    <Layout>
-        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+    <Layout >
+        <Header style={{ position: 'fixed', zIndex: 1, width: '100%', borderRadius: "0px 0px 20px 20px" }}>
             <div className="logo" />
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                <Menu.Item key="1" icon={<UserOutlined />}>
-                    <Link to={'/dashboard/kitchen'}>Кухня</Link>
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1">
+                    <LinkContainer to='/dashboard/restaurant'>
+                        <Button type="primary">Рестораны</Button>
+                    </LinkContainer>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                    <Link to={'/dashboard/restaurant'}>Ресторан</Link>
+                <Menu.Item key="2">
+                    <LinkContainer to='/dashboard/kitchen'>
+                        <Button type="primary">Кухни</Button>
+                    </LinkContainer>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<UploadOutlined />}>
-                    Заказы
+                <Menu.Item key="3">
+                    <LinkContainer to='/'>
+                        <Button type="primary">На главную</Button>
+                    </LinkContainer>
                 </Menu.Item>
                 <Menu.Item key="4" onClick={() => closeSession()} icon={<CloseCircleOutlined />}>
-                    Выйти из кабинета
+                    <LinkContainer to='/'>
+                        <Button type="primary">                    Выйти из кабинета
+                        </Button>
+                    </LinkContainer>
                 </Menu.Item>
             </Menu>
         </Header>
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64, minHeight: "100vh" }}>
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
+
 
             <Route exact path={"/dashboard/kitchen"} component={Kitchen}/>
             <Route exact path={'/dashboard/restaurant'} component={Restaurant}/>

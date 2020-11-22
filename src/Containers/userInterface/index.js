@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Layout, Menu, Breadcrumb, Card, Col, Button, Input, Row, Pagination} from 'antd';
+import React from "react";
+import {Layout, Menu} from 'antd';
 import ModalResto from "../restaurant/modal";
 import {bindActionCreators} from "redux";
 import {withRouter} from "react-router-dom"
-import * as restaurantActions from "../../actions/restaurantActions";
-import * as kitchenActions from "../../actions/kitchenActions";
+// import * as restaurantActions from "../../actions/restaurantActions";
+// import * as kitchenActions from "../../actions/kitchenActions";
 import {connect} from "react-redux";
 import {Route, Link} from "react-router-dom"
-import UserRestaurant from "./Components/Restaurant/index";
+import Restaurant from "../../Containers/restaurant/index";
 import {
     VideoCameraOutlined,
     CloseCircleOutlined
@@ -46,7 +46,7 @@ return  (
         </Header>
         <Content style={{ padding: '0 50px'  }}>
             <div className="site-layout-content">
-                <Route exact path={`/user/restaurants/`} component={UserRestaurant}/>
+                <Route exact path={`/user/restaurants/`} component={Restaurant}/>
                 <Route exact path={`/user/reviews/`} component={Review}/>
             </div>
         </Content>

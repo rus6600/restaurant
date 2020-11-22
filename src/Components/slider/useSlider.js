@@ -4,7 +4,6 @@ const useSlider = (slideImage, slideText, images) => {
     let slideCounter = 0;
 
 
-
     useEffect(() => startSlider())
 
     const startSlider =() => {

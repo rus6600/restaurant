@@ -2,6 +2,7 @@ import {all, put, takeLatest} from "@redux-saga/core/effects"
 import * as types from "../actions/types"
 import axios from "axios"
 import setAuthToken from "../utils/setAuthToken";
+import setRole from "../utils/setRole";
 import jwt_decode from "jwt-decode"
 
 function* signUp(action) {
@@ -16,15 +17,17 @@ function* signUp(action) {
 }
 
 function* signIn(action) {
-    const {data, history} = action;
-    console.log(data)
+    const {data} = action;
     try {
         const authResponse = yield axios.post("http://localhost:5000/api/users/login", data).then(res => res.data)
         const {token, role} = authResponse;
         setAuthToken(token)
+        setRole(role)
         localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
         const decoded = jwt_decode(token);
-        yield put({type: types.SET_CURRENT_USER, payload: decoded})
+        const userRole = role
+        yield put({type: types.SET_CURRENT_USER, payload: decoded, userRole})
         // if (role === "admin")
         //     {history.push("/dashboard/restaurant")}
         // else history.push("/user")
@@ -37,8 +40,10 @@ function* signOut(action) {
     const {history} = action;
     try {
             localStorage.removeItem("token");
-            yield put({type: types.SET_CURRENT_USER, payload: {}});
+            localStorage.removeItem("role");
+        yield put({type: types.SET_CURRENT_USER_SIGN_OUT, payload: {}});
             setAuthToken(false);
+            setRole(false);
             // window.location.href = "/signin";
     } catch(error) {
         yield put({type: types.SIGN_OUT_FAILED, error})

@@ -22,6 +22,8 @@ body {
     font-size: 15px;
     font-family: 'Rubik', sans-serif;
     line-height: 1.80857;
+	background: #ffffff url(../images/slide-back.jpg) no-repeat bottom center;
+
 }
 
 
@@ -103,6 +105,12 @@ a {
 }
 
 a,
+
+.hide {
+	display: none;
+}
+
+
 .btn {
     text-decoration: none !important;
     outline: none !important;
@@ -111,6 +119,7 @@ a,
     -ms-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
+
 }
 
 .btn-custom {
@@ -215,6 +224,17 @@ button:focus{
     Slider
 -------------------------------------------------------------------*/
 
+
+.slider-box {
+	padding: 30px;
+	position: relative;
+	background: #ffffff url(../images/slide-back.jpg) no-repeat bottom center;
+	border-radius: 20px 20px 100px 100px;
+	margin-top: -20px;
+	background-size: cover;
+
+}
+
 .slider {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -288,6 +308,16 @@ button:focus{
 	animation: fadeIn 0.5s;
 }
 /*------------------------------------------------------------------
+
+
+
+/* Slider
+/*------------------------------------------------------------------
+
+
+
+
+
     About
 --
 
@@ -297,6 +327,7 @@ button:focus{
 .about-section-box{
 	padding: 70px 0px;
 	background: #ffffff url(../images/about-bg.jpg) no-repeat bottom center;
+	border-radius: 0px 0px 50px 50px;
 	background-size: cover;
 }
 .about-section-box .img-fluid{

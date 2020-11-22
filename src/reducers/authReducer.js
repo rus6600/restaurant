@@ -5,8 +5,10 @@ const initialState = {
     isLoading: false,
     authResponse: "",
     isAuth: false,
-    user: {}
+    user: {},
+    role: ""
 }
+
 
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
@@ -19,11 +21,13 @@ export default function authReducer(state = initialState, action) {
         case types.SIGN_IN:
             return {...state, isLoading: true};
         case types.SET_CURRENT_USER:
-             return {...state, isLoading: false, user: action.payload, isAuth: isEmpty(action.payload)};
+             return {...state, isLoading: false, user: action.payload, role: action.userRole, isAuth: true};
         case types.SIGN_IN_FAILED:
             return {...state, isLoading: false, error: action.error}
         case types.SIGN_OUT:
             return {...state, isLoading: true}
+        case types.SET_CURRENT_USER_SIGN_OUT:
+            return {...state, isLoading: false, user: action.payload, isAuth: false};
         case types.SIGN_OUT_FAILED:
             return {...state, isLoading: false, error: action.error}
 
