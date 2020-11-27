@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import * as restaurantActions from "../../actions/restaurantActions"
 import ModalResto from "./modal";
 import EditModalResto from "./editModal";
+import {LinkContainer} from "react-router-bootstrap";
 
 
 
@@ -116,6 +117,9 @@ function Restaurant(props) {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
+                    <LinkContainer to={`/restaurants/${record.id}`}>
+                        <Button type="primary">Показать</Button>
+                    </LinkContainer>
                     <Button onClick={() => {editModalVisibleHandler(record);}}>Редактировать</Button>
                     <Button onClick={() => deleteItem(record)}>Удалить</Button>
                 </Space>

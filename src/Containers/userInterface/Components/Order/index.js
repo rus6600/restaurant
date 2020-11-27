@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Form, Input, Select, Modal, Upload, message} from "antd";
+import {Form, Input, Select, Modal, Upload, message, Table} from "antd";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as restaurantActions from "../../../../actions/restaurantActions";
@@ -57,6 +57,14 @@ function Order(props) {
         props.reviewActions.deleteReview(item.id)
     }
 
+    useEffect( () => {
+        async function fetchData() {
+            await props.orderActions.getOrder();
+        }
+        fetchData();
+    }, [props.orderActions])
+
+
     const onChange = e => {
         const {value, name} = e.target;
         setFormData(prev => ({
@@ -75,36 +83,49 @@ function Order(props) {
 
     }
 
+    const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            render: text => <h4>{text}</h4>,
+        },
+        {
+            title: 'ORDER DATE',
+            dataIndex: 'orderdate',
+            key: 'orderdate',
+            render: text => <h4>{text}</h4>,
+        },
+        {
+            title: 'GUEST',
+            dataIndex: 'guest',
+            key: 'guest',
+            render: text => <h4>{text}</h4>,
+        },
+        {
+            title: 'NAME',
+            dataIndex: 'name',
+            key: 'name',
+            render: text => <h4>{text}</h4>,
+        },
 
-    const orders = props.order?.order?.map((item, i)   => {
-        console.log(item)
+    ]
 
-        return (
-            <Card key={i}>
-                <Card.Body>
-                    <Card.Title>"{item.id}"</Card.Title>
-                    <Card.Text>
-                        {Date(item.orderdate).slice(0,10)}
-                    </Card.Text>
-                    <Card.Text>
-                        {item.guest}
-                    </Card.Text>
-                    <Card.Text>
-                        {item.orderdate}
-                    </Card.Text>
-
-                </Card.Body>
-                <Card.Footer>
-                    <Button onClick={() => setVisible(true)} style={{marginTop: 10}}>Добавить</Button>
-                </Card.Footer>
-            </Card>
-        )
+    const orders = props.order?.map((item, i)   => {
+        return {
+            key:i,
+            id: item.id,
+            orderdate: item.orderdate,
+            guest: item.guest,
+            name: item.Restaurant.name,
+        }
     })
+
+
 
     return (
         <div>
-            {orders}
-
+            <Table columns={columns} dataSource={orders} />
             <Modal
                 title="Basic Modal"
                 visible={visible}

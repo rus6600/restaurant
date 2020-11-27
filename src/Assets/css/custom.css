@@ -1,2 +1,38 @@
 
 /** ADD YOUR AWESOME CODES HERE **/
+
+.col-lg-4 {
+    position: relative;
+    max-width: 100px;
+    padding-right: 100px;
+    margin-left: 100px;
+    background: white;
+
+}
+
+.list-group {
+    align-items: center;
+}
+
+.list-group-item {
+    font-family: 'Rubik', sans-serif;
+	font-weight: 200;
+
+    margin-left: 150px;
+    background-color: orange;
+    width: 200px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.list-group-item:hover {
+    margin-left: 150px;
+    background: #d65106;
+	color: #ffffff;
+    width: 200px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.card {
+    background-color: #d65106;
+    border-radius: 10px 10px 10px 10px;
+}

@@ -20,6 +20,7 @@ import {
     UploadOutlined,
     CloseCircleOutlined
 } from '@ant-design/icons';
+import Order from "../userInterface/Components/Order";
 
 
 const { Header, Content, Footer } = Layout;
@@ -54,7 +55,12 @@ return (
                         <Button type="primary">На главную</Button>
                     </LinkContainer>
                 </Menu.Item>
-                <Menu.Item key="4" onClick={() => closeSession()} icon={<CloseCircleOutlined />}>
+                <Menu.Item key="4">
+                    <LinkContainer to='/order'>
+                        <Button type="primary">Заказы</Button>
+                    </LinkContainer>
+                </Menu.Item>
+                <Menu.Item key="5" onClick={() => closeSession()} icon={<CloseCircleOutlined />}>
                     <LinkContainer to='/'>
                         <Button type="primary">                    Выйти из кабинета
                         </Button>
@@ -64,10 +70,9 @@ return (
         </Header>
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64, minHeight: "100vh" }}>
 
-
+            <Route exact path={"/dashboard/order"} component={Order}/>
             <Route exact path={"/dashboard/kitchen"} component={Kitchen}/>
             <Route exact path={'/dashboard/restaurant'} component={Restaurant}/>
-            <Route exact path={`/dashboard/restaurants/:id`} component={ShowRestaurant}/>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
     </Layout>

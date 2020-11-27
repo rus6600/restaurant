@@ -19,6 +19,7 @@ import SimpleSlider from "./Components/slider";
 import Slider from "../src/Components/slider/Slider"
 import Mainpage2 from "./Components/Mainpage/mainpage2";
 import setRole from "./utils/setRole";
+import ShowRestaurant from "./Containers/restaurant/showRestaurant";
 
 const store = configureStore()
 console.log(localStorage)
@@ -49,6 +50,7 @@ function App() {
           <Provider store={store}>
             <Router>
                 <Switch>
+                    <Route exact path={`/restaurants/:id`} component={ShowRestaurant}/>
                     <Route exact path={'/'} component={Mainpage}/>
                     <Route exact path={'/signup'} component={SignUp}/>
                     <Route exact path={'/signin'} component={Signin}/>

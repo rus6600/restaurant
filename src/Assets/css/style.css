@@ -3,6 +3,7 @@
 -------------------------------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text:100,300,400,500,600,700,800,900&display=swap');
 
 /*------------------------------------------------------------------
     IMPORT FILES
@@ -227,12 +228,22 @@ button:focus{
 
 .slider-box {
 	padding: 30px;
+	display: flex;
 	position: relative;
+	max-height: 70%;
 	background: #ffffff url(../images/slide-back.jpg) no-repeat bottom center;
 	border-radius: 20px 20px 100px 100px;
 	margin-top: -20px;
 	background-size: cover;
 
+}
+
+
+.slider-component {
+	max-height: 70%;
+	margin: auto;
+	padding: 0px;
+	border-radius: 10px 10px 10px 10px;
 }
 
 .slider {
@@ -315,15 +326,45 @@ button:focus{
 /*------------------------------------------------------------------
 
 
+*/
+
+
+.col-lg-4, .col-lg-4 {
+    position: relative;
+    min-height: 10px;
+    max-width: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
 
 
 
-    About
---
 
 
 
- */
+
+
+
+.restopage {
+    padding-top: 150px;
+    background-color: white;
+    line-height: auto;
+    border-radius: 0px 0px 50px 50px;
+
+}
+
+
+.menu-section {
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    font-family: 'Big Shoulders Text', cursive;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+
+
 .about-section-box{
 	padding: 70px 0px;
 	background: #ffffff url(../images/about-bg.jpg) no-repeat bottom center;
@@ -334,13 +375,19 @@ button:focus{
 	box-shadow: 20px 20px 0px #d65106;
 }
 .inner-column{
+    padding: 10px;
 	text-align: left;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    opacity: 0.9;
+    
+    
 }
 .inner-column h1{
 	font-family: 'Rubik', sans-serif;
 	font-size: 30px;
 	color: #010101;
-	font-weight: 500;
+	font-weight: 700;
 }
 .inner-column h1 span{
 	color: #d65106;

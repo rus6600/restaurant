@@ -22,7 +22,6 @@ function* getRestaurants(action) {
 
 function* getRestaurantsById(action) {
     const {data} = action
-    console.log(data)
         try {
             const restaurantResponse = yield axios.get(`http://localhost:5000/api/restaurant/${data}`).then(res => res.data);
             yield put({type: types.RESTAURANTS_ID_RECEIVED, payload: restaurantResponse});

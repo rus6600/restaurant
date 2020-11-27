@@ -28,7 +28,14 @@ import slider01 from "../../Assets/images/slider-01.jpg"
 import slider02 from "../../Assets/images/slider-02.jpg"
 import slider03 from "../../Assets/images/slider-03.jpg"
 import gallery_img_01 from "../../Assets/images/gallery-img-01.jpg"
+import gallery_img_02 from "../../Assets/images/gallery-img-02.jpg"
+import gallery_img_03 from "../../Assets/images/gallery-img-03.jpg"
+import gallery_img_04 from "../../Assets/images/gallery-img-04.jpg"
+import gallery_img_05 from "../../Assets/images/gallery-img-05.jpg"
+import gallery_img_06 from "../../Assets/images/gallery-img-06.jpg"
 
+
+import about_image from "../../Assets/images/about-img.jpg"
 /** @jsx jsx */
 import SignUp from "../../Containers/signup/index"
 import UserRestaurant from "../../Containers/userInterface/Components/Restaurant/index"
@@ -37,6 +44,10 @@ import ModalSignIn from "./modalSignIn";
 import * as authActions from "../../actions/authActions";
 import Review from "../../Containers/userInterface/Components/Review";
 import Order from "../../Containers/userInterface/Components/Order/"
+import Kitchen from "../../Containers/kitchen";
+import Dashboard from "../../Containers/dashboard";
+import ShowRestaurant from "../../Containers/restaurant/showRestaurant";
+import SpecialMenu from "../Special Menu";
 
 
 
@@ -69,9 +80,10 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
 
 
     <div >
+        <Route exact path={`/restaurants/:id`} component={ShowRestaurant}/>
         <ModalCheck showSignUp={showSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn} setShowSignIn={setShowSignIn} setShowSignUp={setShowSignUp}/>
         <ModalSignIn showSignIn={showSignIn} handleSignIn={handleSignIn}/>
-
+        <Route exact path={"/dashboard/"} component={Dashboard}/>
         <div>
         <header className="top-navbar">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -163,25 +175,21 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
             </Carousel>
 
             <div className="slider-box">
-            <div className="container" >
-                <div className="row ">
-                    <div className="col-lg-4 col-md-4 col-sm-12 text-center " >
+            <div className="container-fluid" >
+                <div className="row " >
+                    <div className="col-lg-6 col-md-6 col-sm-12 text-center"  >
 
-                                <UserRestaurant/>
-
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-12 text-center">
-
-                        <Review/>
+                                <UserRestaurant className="slider-component"/>
 
                     </div>
 
-                    <div className="col-lg-4 col-md-4 col-sm-12 text-center">
+                    <div className="col-lg-6 col-md-6 col-sm-12 text-center">
 
-                        <Order/>
+                        <Review className="slider-component"/>
 
                     </div>
+
+
 
 
                 </div>
@@ -189,11 +197,6 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
 
             </div>
             </div>
-
-
-
-
-
 
 
 
@@ -212,7 +215,7 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
                     </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
-                    <img src="images/about-img.jpg" alt="" className="img-fluid"/>
+                    <img src={about_image} alt="" className="img-fluid"/>
                 </div>
             </div>
         </div>
@@ -233,246 +236,13 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
         </div>
     </div>
 
-    <div className="menu-box">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="heading-title text-center">
-                        <h2>Special Menu</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                    </div>
-                </div>
+
             </div>
+        <div>
 
-            <div className="row inner-menu-box">
-                <div className="col-3">
-                    <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
-                        <a className="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Drinks</a>
-                        <a className="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Lunch</a>
-                    <a className="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Dinner</a>
-                </div>
-            </div>
+            <SpecialMenu/>
 
-            <div className="col-9">
-                <div className="tab-content" id="v-pills-tabContent">
-                    <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-01.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $7.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-02.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $9.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-03.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $10.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-04.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $15.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-05.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $18.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-06.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $20.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-07.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $25.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-08.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $22.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-09.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $24.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-01.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $7.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-02.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $9.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid drinks">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-03.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Drinks 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $10.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-04.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $15.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-05.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $18.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid lunch">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-06.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Lunch 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $20.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-07.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 1</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $25.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-08.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 2</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $22.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4 col-md-6 special-grid dinner">
-                                <div className="gallery-single fix">
-                                    <img src="images/img-09.jpg" className="img-fluid" alt="Image"/>
-                                        <div className="why-text">
-                                            <h4>Special Dinner 3</h4>
-                                            <p>Sed id magna vitae eros sagittis euismod.</p>
-                                            <h5> $24.79</h5>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <div>
 
 
     <div className="gallery-box">
@@ -488,33 +258,33 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
             <div className="tz-gallery">
                 <div className="row">
                     <div className="col-sm-12 col-md-4 col-lg-4">
-                        <a className="lightbox" href="../../Assets/images/gallery-img-01.jpg">
+                        <a className="lightbox">
                             <img className="img-fluid" src={gallery_img_01} alt="Gallery Images"/>
                         </a>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-4">
-                        <a className="lightbox" href="images/gallery-img-02.jpg">
-                            <img className="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images"/>
+                        <a className="lightbox" >
+                            <img className="img-fluid" src={gallery_img_02} alt="Gallery Images"/>
                         </a>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-4">
-                        <a className="lightbox" href="images/gallery-img-03.jpg">
-                            <img className="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images"/>
+                        <a className="lightbox">
+                            <img className="img-fluid" src={gallery_img_03} alt="Gallery Images"/>
                         </a>
                     </div>
                     <div className="col-sm-12 col-md-4 col-lg-4">
-                        <a className="lightbox" href="images/gallery-img-04.jpg">
-                            <img className="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images"/>
+                        <a className="lightbox" >
+                            <img className="img-fluid" src={gallery_img_04} alt="Gallery Images"/>
                         </a>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-4">
-                        <a className="lightbox" href="images/gallery-img-05.jpg">
-                            <img className="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images"/>
+                        <a className="lightbox" >
+                            <img className="img-fluid" src={gallery_img_05} alt="Gallery Images"/>
                         </a>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-4">
-                        <a className="lightbox" href="images/gallery-img-06.jpg">
-                            <img className="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images"/>
+                        <a className="lightbox">
+                            <img className="img-fluid" src={gallery_img_06} alt="Gallery Images"/>
                         </a>
                     </div>
                 </div>
@@ -575,7 +345,7 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
         </div>
     </div>
 
-    <div className="contact-imfo-box">
+    <div className="contact-info-box">
         <div className="container">
             <div className="row">
                 <div className="col-md-4 arrow-right">

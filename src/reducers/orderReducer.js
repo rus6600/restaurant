@@ -17,7 +17,7 @@ export default function orderReducer(state = initialState, action) {
         case types.ADD_ORDER:
             return {...state, isLoading: true, error: action.error};
         case types.ORDER_ADDED:
-            return {...state, isLoading: false, order: action.payload, error: action.error};
+            return {...state, isLoading: false, orderResponse: action.payload, error: action.error};
         case types.ORDER_ADD_FAILED:
             return  {...state, isLoading: false, error: action.error};
 

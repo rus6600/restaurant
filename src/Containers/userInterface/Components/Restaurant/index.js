@@ -8,6 +8,9 @@ import * as restaurantActions from "../../../../actions/restaurantActions"
 import Card from 'react-bootstrap/Card'
 import Slider from "react-slick";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {LinkContainer} from "react-router-bootstrap";
+import {Button, Space} from "antd";
+import ShowRestaurant from "../../../restaurant/showRestaurant";
 
 
 function UserRestaurant(props) {
@@ -37,14 +40,18 @@ const settings = {
 const data = props.restaurant?.restaurants?.map((item, i) => {
         return (
             <div key={i} >
-                <Card>
-                    <Card.Img variant="top" src={`http://localhost:5000/${item.image}`} />
-                    <Card.Body>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Title>{item.location}</Card.Title>
-                    </Card.Body>
-                </Card>
+                <div className="card" >
+                    <img className="card-img-top" variant="top" src={`http://localhost:5000/${item.image}`} />
+                    <div className="card-body">
+                        <LinkContainer to={`/restaurants/${item.id}`}>
+                            <div className="card-title">{item.name}</div>
+                        </LinkContainer>
+                        <div className="card-title">{item.location}</div>
+                        <div className="card-title">{item.phone}</div>
+                    </div>
+                </div>
             </div>
+
         )
     }
 )
@@ -54,7 +61,7 @@ console.log(Date(Date.UTC()))
 
 return (
     <div >
-        <Slider {...settings}>
+        <Slider {...settings} onClick={() => console.log("NIGGER!!")}>
             {data}
         </Slider>
 
