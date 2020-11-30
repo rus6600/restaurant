@@ -23,7 +23,6 @@ body {
     font-size: 15px;
     font-family: 'Rubik', sans-serif;
     line-height: 1.80857;
-	background: #ffffff url(../images/slide-back.jpg) no-repeat bottom center;
 
 }
 
@@ -226,13 +225,22 @@ button:focus{
 -------------------------------------------------------------------*/
 
 
+.mapContainer {
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+
 .slider-box {
 	padding: 30px;
 	display: flex;
 	position: relative;
 	max-height: 70%;
 	background: #ffffff url(../images/slide-back.jpg) no-repeat bottom center;
-	border-radius: 20px 20px 100px 100px;
+	border-radius: 30px 30px 30px 30px;
 	margin-top: -20px;
 	background-size: cover;
 
@@ -243,7 +251,7 @@ button:focus{
 	max-height: 70%;
 	margin: auto;
 	padding: 0px;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 30px 30px 30px 30px;
 }
 
 .slider {
@@ -340,7 +348,16 @@ button:focus{
 
 
 
+.marker-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
 
+.marker-btn img {
+	width: 20px;
+	height: 20px;
+}
 
 
 

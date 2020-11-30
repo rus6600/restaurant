@@ -115,7 +115,7 @@ function Kitchen(props) {
 
     return(
         <div>
-            <Button type="primary" onClick={openModal}>Добавить кухню</Button>
+            <Button style={{display: "block", marginBottom: 10}} type="primary" onClick={openModal}>Добавить кухню</Button>
             <Table columns={columns} dataSource={data} />
             <Modal
                 title="Введите название новой кухни"

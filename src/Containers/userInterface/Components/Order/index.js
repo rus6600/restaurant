@@ -73,12 +73,9 @@ function Order(props) {
         }))
     }
 
-    console.log(props.order)
-    console.log(props.restaurant)
 
     const okHandler = () => {
         setVisible(false)
-        console.log(formdata)
         props.orderActions.addOrder(formdata);
 
     }
@@ -125,6 +122,9 @@ function Order(props) {
 
     return (
         <div>
+        <Button onClick={() => setVisible(true)} style={{display: "block", marginBottom: 10}}>Add order</Button>
+
+    <div>
             <Table columns={columns} dataSource={orders} />
             <Modal
                 title="Basic Modal"
@@ -174,6 +174,7 @@ function Order(props) {
 
                 </Form>
             </Modal>
+        </div>
         </div>
     )
 }

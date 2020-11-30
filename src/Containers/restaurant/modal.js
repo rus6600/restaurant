@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import * as restaurantActions from "../../actions/restaurantActions";
 import * as kitchenActions from "../../actions/kitchenActions";
 import {connect} from "react-redux";
+import * as mapActions from "../../actions/mapActions";
 
 function ModalResto(props) {
 const {visible, setVisible, handler} = props
@@ -24,6 +25,7 @@ const [formdata, setFormData] = useState({
     phone: "",
     location: "",
     amountOfPlace: "",
+    coordinates: [],
     image: "",
     averageBill: "",
     kitchens: [],
@@ -36,6 +38,10 @@ const  getBase64 = (img, callback) => {
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
 }
+
+
+
+
 
 const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -100,7 +106,28 @@ const onChange = e => {
     }))
 }
 
-const uploadButton = (
+const onChangeCoordinates = e => {
+    const {name,value} = e.target;
+    props.mapActions.getCoordinates(e.target.value);
+    setFormData(prev => ({
+        ...prev,
+        [name]: value
+    }))
+}
+
+useEffect(() => {
+    setFormData(prev => ({
+        ...prev,
+        coordinates: props.coordinates
+    }));
+    console.log(formdata)
+
+}, [props.coordinates])
+
+
+
+
+    const uploadButton = (
     <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
         <div style={{ marginTop: 8 }}>Upload</div>
@@ -148,7 +175,7 @@ return (
                     },
                 ]}
             >
-                <Input name="location"  onChange={onChange}/>
+                <Input name="location"  onChange={onChangeCoordinates}/>
             </Form.Item>
             <Form.Item
                 label="Телефоный номер"
@@ -249,12 +276,16 @@ const mapStateToProps = state => ({
     error: state.restaurant.error,
     isLoading: state.kitchen.isLoading,
     kitchens: state.kitchen.kitchens,
-    restaurants: state.restaurant.restaurants
+    restaurants: state.restaurant.restaurants,
+    coordinates: state.map.coordinates,
+
 })
 
 const mapDispatchToProps = dispatch => ({
     restaurantActions: bindActionCreators(restaurantActions, dispatch),
-    kitchenActions: bindActionCreators(kitchenActions, dispatch)
+    kitchenActions: bindActionCreators(kitchenActions, dispatch),
+    mapActions: bindActionCreators(mapActions, dispatch)
+
 
 })
 

@@ -149,7 +149,7 @@ function Restaurant(props) {
             <Input onChange={searchHandler} style={{marginBottom: 20}} placeholder="Введите название ресторана" />
             <Table columns={columns} dataSource={data} />
 
-            {/*<Pagination onChange={onChangePage} current={search.page} pageSize={2} total={Number(props.restaurant?.total)}/>*/}
+            <Pagination onChange={onChangePage} current={search.page} pageSize={2} total={Number(props.restaurant?.total)}/>
             <ModalResto visible={modalVisible} setVisible={setModalVisible}/>
             <EditModalResto
                 restoId={restoId}

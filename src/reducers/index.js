@@ -4,7 +4,8 @@ import kitchen from "./kitchenReducer";
 import restaurant from "./restaurantReducer"
 import review from "./reviewReducer"
 import order from "./orderReducer"
+import map from "./mapReducer"
 
 export default combineReducers({
-    auth,kitchen,restaurant,review,order
+    auth,kitchen,restaurant,review,order,map
 })

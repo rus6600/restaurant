@@ -11,7 +11,6 @@ import Restaurant from "../restaurant";
 import ShowRestaurant from "../restaurant/showRestaurant";
 import Kitchen from "../kitchen";
 import { LinkContainer } from 'react-router-bootstrap'
-
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -51,18 +50,19 @@ return (
                     </LinkContainer>
                 </Menu.Item>
                 <Menu.Item key="3">
+                    <LinkContainer to='/dashboard/order'>
+                        <Button type="primary">Заказы</Button>
+                    </LinkContainer>
+                </Menu.Item>
+                <Menu.Item key="4">
                     <LinkContainer to='/'>
                         <Button type="primary">На главную</Button>
                     </LinkContainer>
                 </Menu.Item>
-                <Menu.Item key="4">
-                    <LinkContainer to='/order'>
-                        <Button type="primary">Заказы</Button>
-                    </LinkContainer>
-                </Menu.Item>
                 <Menu.Item key="5" onClick={() => closeSession()} icon={<CloseCircleOutlined />}>
                     <LinkContainer to='/'>
-                        <Button type="primary">                    Выйти из кабинета
+                        <Button type="primary">
+                            Выйти из кабинета
                         </Button>
                     </LinkContainer>
                 </Menu.Item>
@@ -73,7 +73,8 @@ return (
             <Route exact path={"/dashboard/order"} component={Order}/>
             <Route exact path={"/dashboard/kitchen"} component={Kitchen}/>
             <Route exact path={'/dashboard/restaurant'} component={Restaurant}/>
-        </Content>
+
+            </Content>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
     </Layout>
 );

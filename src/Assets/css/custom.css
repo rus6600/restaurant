@@ -10,6 +10,8 @@
 
 }
 
+
+
 .list-group {
     align-items: center;
 }
@@ -29,10 +31,40 @@
     background: #d65106;
 	color: #ffffff;
     width: 200px;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 30px 30px 30px 30px;
 }
 
 .card {
-    background-color: #d65106;
-    border-radius: 10px 10px 10px 10px;
+    background-color:transparent;
+    border-radius: 30px 30px 30px 30px;
+
 }
+
+.card-body-text {
+    border-radius: 30px 30px 30px 30px;
+        background-color:transparent;
+
+}
+
+.card-img-top {
+    opacity: 1;
+    border-radius: 30px 30px 30px 30px;
+    background-color:transparent;
+
+}
+
+.btn-outline-success {
+    font-size: 1.6em;
+    font-family: 'Rubik', sans-serif;
+	font-weight: 200;
+
+
+}
+
+.slick-list {
+    background-color:transparent;
+    border-radius: 30px 30px 30px 30px;
+
+}
+
+

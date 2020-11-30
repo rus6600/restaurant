@@ -42,13 +42,16 @@ const data = props.restaurant?.restaurants?.map((item, i) => {
             <div key={i} >
                 <div className="card" >
                     <img className="card-img-top" variant="top" src={`http://localhost:5000/${item.image}`} />
-                    <div className="card-body">
-                        <LinkContainer to={`/restaurants/${item.id}`}>
-                            <div className="card-title">{item.name}</div>
-                        </LinkContainer>
-                        <div className="card-title">{item.location}</div>
-                        <div className="card-title">{item.phone}</div>
-                    </div>
+                </div>
+
+                <div className="card" >
+                <div className="card-body-text">
+                    <LinkContainer to={`/restaurants/${item.id}`}>
+                        <div className="btn-lg">{item.name}</div>
+                    </LinkContainer>
+                    <div className="card-title">{item.location}</div>
+                    <div className="card-title">{item.phone}</div>
+                </div>
                 </div>
             </div>
 
@@ -56,12 +59,11 @@ const data = props.restaurant?.restaurants?.map((item, i) => {
     }
 )
 
-console.log(Date(Date.UTC()))
 
 
 return (
     <div >
-        <Slider {...settings} onClick={() => console.log("NIGGER!!")}>
+        <Slider {...settings} >
             {data}
         </Slider>
 

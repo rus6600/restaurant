@@ -41,6 +41,7 @@ function* addRestaurant(action) {
     fm.append('kitchens', JSON.stringify(data.kitchens));
     fm.append('averageBill', data.averageBill)
     fm.append('amountOfPlace', data.amountOfPlace)
+    fm.append('coordinates', data.coordinates)
     fm.append('phone', data.phone)
     fm.append('rate', data.rate)
     try {

@@ -48,16 +48,16 @@ function SpecialMenu() {
             <Row>
                 <div className="col-lg-4 col-md-6 col-sm-12 text-center">
                     <div class="list-group" defaultActiveKey="#link1" >
-                        <div  class="list-group-item" action onClick={() => AllClicked()}>
+                        <div  class="list-group-item"  onClick={() => AllClicked()}>
                             Показать все
                         </div>
-                        <div  class="list-group-item" action onClick={() => LunchClicked()} >
+                        <div  class="list-group-item"  onClick={() => LunchClicked()} >
                             Ланч
                         </div>
-                        <div  class="list-group-item" ction onClick={() => DinnerClicked()}>
+                        <div  class="list-group-item"  onClick={() => DinnerClicked()}>
                             Ужин
                         </div>
-                        <div  class="list-group-item" action onClick={() => DrinksClicked()}>
+                        <div  class="list-group-item"  onClick={() => DrinksClicked()}>
                             Напитки
                         </div>
                     </div>

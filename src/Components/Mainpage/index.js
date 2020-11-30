@@ -11,6 +11,7 @@ import {bindActionCreators} from "redux";
 import * as kitchenActions from "../../actions/kitchenActions";
 import {connect} from "react-redux";
 import * as restaurantActions from "../../actions/restaurantActions"
+import * as mapActions from "../../actions/mapActions"
 import * as orderActions from "../../actions/orderActions"
 import "../../Assets/css/animate.css"
 import '../../Assets/css/style.css'
@@ -41,6 +42,7 @@ import SignUp from "../../Containers/signup/index"
 import UserRestaurant from "../../Containers/userInterface/Components/Restaurant/index"
 import ModalCheck from "../Mainpage/modal"
 import ModalSignIn from "./modalSignIn";
+import SimpleMap from "../../Components/RestoMap/index"
 import * as authActions from "../../actions/authActions";
 import Review from "../../Containers/userInterface/Components/Review";
 import Order from "../../Containers/userInterface/Components/Order/"
@@ -48,7 +50,7 @@ import Kitchen from "../../Containers/kitchen";
 import Dashboard from "../../Containers/dashboard";
 import ShowRestaurant from "../../Containers/restaurant/showRestaurant";
 import SpecialMenu from "../Special Menu";
-
+import SecondMap from "../RestoMap/MapGl/index"
 
 
 
@@ -176,19 +178,18 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
 
             <div className="slider-box">
             <div className="container-fluid" >
-                <div className="row " >
-                    <div className="col-lg-6 col-md-6 col-sm-12 text-center"  >
+                <div className="row " style={{maxHeight: "70%"}}>
+                    <div className="col-lg-6 col-md-6 col-sm-12 text-center"   >
 
                                 <UserRestaurant className="slider-component"/>
 
                     </div>
 
-                    <div className="col-lg-6 col-md-6 col-sm-12 text-center">
+                    <div className="col-lg-6 col-md-6 col-sm-12 text-center" >
 
-                        <Review className="slider-component"/>
+                        <SecondMap className="slider-component"/>
 
                     </div>
-
 
 
 
@@ -199,10 +200,9 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
             </div>
 
 
+        <SimpleMap/>
 
-
-
-    <div className="about-section-box">
+            <div className="about-section-box">
         <div className="container">
             <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12 text-center">
@@ -453,7 +453,8 @@ const mapDispatchToProps = dispatch => ({
     restaurantActions: bindActionCreators(restaurantActions, dispatch),
     kitchenActions: bindActionCreators(kitchenActions, dispatch),
     authActions: bindActionCreators(authActions, dispatch),
-    orderActions: bindActionCreators(orderActions, dispatch)
+    orderActions: bindActionCreators(orderActions, dispatch),
+    mapActions: bindActionCreators(mapActions, dispatch)
 
 })
 
