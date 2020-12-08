@@ -6,11 +6,13 @@ import * as kitchenActions from "../../../../actions/kitchenActions";
 import {connect} from "react-redux";
 import * as restaurantActions from "../../../../actions/restaurantActions"
 import Card from 'react-bootstrap/Card'
+import { Rate } from 'antd';
 import Slider from "react-slick";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {LinkContainer} from "react-router-bootstrap";
 import {Button, Space} from "antd";
 import ShowRestaurant from "../../../restaurant/showRestaurant";
+import Review from "../Review";
 
 
 function UserRestaurant(props) {
@@ -38,20 +40,20 @@ const settings = {
 
 
 const data = props.restaurant?.restaurants?.map((item, i) => {
+
         return (
             <div key={i} >
                 <div className="card" >
                     <img className="card-img-top" variant="top" src={`http://localhost:5000/${item.image}`} />
                 </div>
 
-                <div className="card" >
                 <div className="card-body-text">
                     <LinkContainer to={`/restaurants/${item.id}`}>
-                        <div className="btn-lg">{item.name}</div>
+                        <h1>{item.name}</h1>
                     </LinkContainer>
                     <div className="card-title">{item.location}</div>
                     <div className="card-title">{item.phone}</div>
-                </div>
+                    <Rate disabled defaultValue={item.rate}/>
                 </div>
             </div>
 
@@ -76,6 +78,7 @@ const mapStateToProps = state => ({
     error: state.restaurant.error,
     isLoading: state.kitchen.isLoading,
     kitchens: state.kitchen.kitchens,
+    review: state.review,
     restaurant: state.restaurant.restaurant,
 })
 

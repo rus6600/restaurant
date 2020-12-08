@@ -6,6 +6,7 @@ import * as restaurantActions from "../../../../actions/restaurantActions";
 import * as kitchenActions from "../../../../actions/kitchenActions";
 import * as reviewActions from "../../../../actions/reviewActions"
 import Card from 'react-bootstrap/Card'
+import {Col} from "react-bootstrap"
 import CardGroup from 'react-bootstrap/CardGroup'
 import Button from 'react-bootstrap/Button'
 
@@ -76,27 +77,30 @@ const okHandler = () => {
 
 
 
-const reviews = props.review?.reviews?.map((item, i)   => {
-return (
-    <Card key={i}>
-    <Card.Body>
-        <Card.Title>"{item.text}"</Card.Title>
-        <Card.Text>
-            {Date(item.createdAt).slice(0,10)}
-        </Card.Text>
-        <Card.Text>
-            {item.restaurantId}
-        </Card.Text>
-        <Card.Text>
-            {item.userId}
-        </Card.Text>
+    const reviews = props.review?.reviews?.map((item, i)   => {
+    return (
 
-    </Card.Body>
-    <Card.Footer>
-        <Button onClick={() => setVisible(true)} style={{marginTop: 10}}>Добавить</Button>
-        <Button onClick={() => deleteItem(item)} style={{marginTop: 10}}>Удалить</Button>
-    </Card.Footer>
-</Card>
+            <Col className="col-lg-6 col-md-6 col-sm-12 text-center">
+                <Card key={i}>
+                <Card.Body>
+                    <Card.Title>"{item.text}"</Card.Title>
+                    <Card.Text>
+                        {Date(item.createdAt).slice(0,10)}
+                    </Card.Text>
+                    <Card.Text>
+                        {item.restaurantId}
+                    </Card.Text>
+                    <Card.Text>
+                        {item.userId}
+                    </Card.Text>
+
+                </Card.Body>
+                <Card.Footer>
+                    <Button onClick={() => setVisible(true)} style={{marginTop: 10}}>Добавить</Button>
+                    <Button onClick={() => deleteItem(item)} style={{marginTop: 10}}>Удалить</Button>
+                </Card.Footer>
+                </Card>
+            </Col>
     )
 })
 

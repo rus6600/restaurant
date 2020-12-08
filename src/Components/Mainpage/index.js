@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom"
-import {Button} from "antd";
 import Carousel from 'react-bootstrap/Carousel'
-import App from "../../App";
-import { css } from '@emotion/css'
-import { jsx } from '@emotion/react'
 import {withRouter} from "react-router-dom"
 import { LinkContainer } from 'react-router-bootstrap'
 import {bindActionCreators} from "redux";
@@ -34,10 +30,7 @@ import gallery_img_03 from "../../Assets/images/gallery-img-03.jpg"
 import gallery_img_04 from "../../Assets/images/gallery-img-04.jpg"
 import gallery_img_05 from "../../Assets/images/gallery-img-05.jpg"
 import gallery_img_06 from "../../Assets/images/gallery-img-06.jpg"
-
-
 import about_image from "../../Assets/images/about-img.jpg"
-/** @jsx jsx */
 import SignUp from "../../Containers/signup/index"
 import UserRestaurant from "../../Containers/userInterface/Components/Restaurant/index"
 import ModalCheck from "../Mainpage/modal"
@@ -51,6 +44,8 @@ import Dashboard from "../../Containers/dashboard";
 import ShowRestaurant from "../../Containers/restaurant/showRestaurant";
 import SpecialMenu from "../Special Menu";
 import SecondMap from "../RestoMap/MapGl/index"
+import Cabinet from "../../Containers/userInterface/Components/Cabinet";
+import ListRestaurants from "../../Containers/restaurants/index"
 
 
 
@@ -59,6 +54,7 @@ function Mainpage(props) {
 const [visible,setVisible] = useState(false)
 const [showSignUp, setShowSignUp] = useState(false);
 const [showSignIn, setShowSignIn] = useState(false);
+const [visibleDropDown, setVisibleDropDown]= useState(false)
 
 const handleSignUp = () => setShowSignUp(!showSignUp);
 const handleSignIn = () => setShowSignIn(!showSignIn);
@@ -78,14 +74,17 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
 
 
 
-    return (
+return (
 
 
-    <div >
+    <div>
         <Route exact path={`/restaurants/:id`} component={ShowRestaurant}/>
+        <Route exact path={"/dashboard/"} component={Dashboard}/>
+        <Route exact path={"/cabinet/"} component={Cabinet}/>
+        <Route exact path={"/restaurants/"} component={ListRestaurants}/>
         <ModalCheck showSignUp={showSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn} setShowSignIn={setShowSignIn} setShowSignUp={setShowSignUp}/>
         <ModalSignIn showSignIn={showSignIn} handleSignIn={handleSignIn}/>
-        <Route exact path={"/dashboard/"} component={Dashboard}/>
+
         <div>
         <header className="top-navbar">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -93,44 +92,34 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
                 <a className="navbar-brand" href="index.html">
                     <img  src={logo} alt="" />
                 </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+
                 <div className="collapse navbar-collapse" id="navbars-rs-food">
+
                     <ul className="navbar-nav ml-auto">
-
                         <LinkContainer to="/">
-                        <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
+                            <li className="nav-item active"><a className="nav-link" href="index.html">Главная</a></li>
+                        </LinkContainer>
+
+                        <LinkContainer to="/restaurants">
+                            <li className="nav-item active"><a className="nav-link" href="index.html">Рестораны</a></li>
+                        </LinkContainer>
+
+                        <LinkContainer to="/cabinet">
+
+                        <li className={ props.role  === "user" ? "nav-item active" : "hide"}><a className={ props.role === "user" ? "nav-link" : "hide"} >Кабинет</a></li>
+
                         </LinkContainer>
 
 
-
-
-
-
-                        <li className="nav-item"><a className="nav-link" href="menu.html">Menu</a></li>
-                        <li className="nav-item"><a className="nav-link" href="about.html">About</a></li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
-                            <div className="dropdown-menu" aria-labelledby="dropdown-a">
-                                <a className="dropdown-item" href="reservation.html">Reservation</a>
-                                <a className="dropdown-item" href="stuff.html">Stuff</a>
-                                <a className="dropdown-item" href="gallery.html">Gallery</a>
-                            </div>
-                        </li>
-
-                        <LinkContainer to="/dashboard">
-                            <li className={ props.role  === "admin" ? "nav-item active" : "hide"}><a className={ props.role === "admin" ? "nav-link" : "hide"} >Dashboard</a></li>
+                        <LinkContainer  to="/dashboard/restaurant">
+                            <li className={ props.role  === "admin" ? "nav-item active" : "hide"}><a className={ props.role === "admin" ? "nav-link" : "hide"} >Админ</a></li>
                         </LinkContainer>
-
-                        { props.isAuth ?
-                            <li className="nav-item"><a className="nav-link" onClick={() => props.authActions.signOut()}>Sign Out</a></li>
-                            :
-                            <li className="nav-item"><a className="nav-link" onClick={() => handleSignUp()}>Sign In</a></li>
-                        }
+                            { props.isAuth ?
+                                <li className="nav-item"><a className="nav-link" onClick={() => props.authActions.signOut()}>Выйти</a></li>
+                                :
+                                <li className="nav-item"><a className="nav-link" onClick={() => handleSignUp()}>Войти</a></li>
+                            }
                         <li>
-
-
                         </li>
                     </ul>
                 </div>
@@ -199,8 +188,6 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
             </div>
             </div>
 
-
-        <SimpleMap/>
 
             <div className="about-section-box">
         <div className="container">
@@ -285,59 +272,6 @@ const handleSignIn = () => setShowSignIn(!showSignIn);
                     <div className="col-sm-6 col-md-4 col-lg-4">
                         <a className="lightbox">
                             <img className="img-fluid" src={gallery_img_06} alt="Gallery Images"/>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div className="customer-reviews-box">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="heading-title text-center">
-                        <h2>Customer Reviews</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                    </div>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-8 mr-auto ml-auto text-center">
-                    <div id="reviews" className="carousel slide" data-ride="carousel">
-                        <div className="carousel-inner mt-4">
-                            <div className="carousel-item text-center active">
-                                <div className="img-box p-1 border rounded-circle m-auto">
-                                    <img className="d-block w-100 rounded-circle" src="images/quotations-button.png" alt=""/>
-                                </div>
-                                <h5 className="mt-4 mb-0"><strong className="text-warning text-uppercase">Paul Mitchel</strong></h5>
-                                <h6 className="text-dark m-0">Web Developer</h6>
-                                <p className="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-                            </div>
-                            <div className="carousel-item text-center">
-                                <div className="img-box p-1 border rounded-circle m-auto">
-                                    <img className="d-block w-100 rounded-circle" src="images/quotations-button.png" alt=""/>
-                                </div>
-                                <h5 className="mt-4 mb-0"><strong className="text-warning text-uppercase">Steve Fonsi</strong></h5>
-                                <h6 className="text-dark m-0">Web Designer</h6>
-                                <p className="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-                            </div>
-                            <div className="carousel-item text-center">
-                                <div className="img-box p-1 border rounded-circle m-auto">
-                                    <img className="d-block w-100 rounded-circle" src="images/quotations-button.png" alt=""/>
-                                </div>
-                                <h5 className="mt-4 mb-0"><strong className="text-warning text-uppercase">Daniel vebar</strong></h5>
-                                <h6 className="text-dark m-0">Seo Analyst</h6>
-                                <p className="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-                            </div>
-                        </div>
-                        <a className="carousel-control-prev" href="#reviews" role="button" data-slide="prev">
-                            <i className="fa fa-angle-left" aria-hidden="true"></i>
-                            <span className="sr-only">Previous</span>
-                        </a>
-                        <a className="carousel-control-next" href="#reviews" role="button" data-slide="next">
-                            <i className="fa fa-angle-right" aria-hidden="true"></i>
-                            <span className="sr-only">Next</span>
                         </a>
                     </div>
                 </div>

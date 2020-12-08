@@ -1,10 +1,12 @@
 import {all} from "redux-saga/effects"
 import {authSaga} from './authSaga'
-import {kitchenSaga} from "./kitchenSaga";
+import {kitchenSaga} from "./kitchenSaga"
 import {restaurantSaga} from "./restaurantSaga"
 import {reviewSaga} from "./reviewSaga"
 import {orderSaga} from "./orderSaga"
-import {mapSaga} from "./mapSaga";
+import {mapSaga} from "./mapSaga"
+import {favSaga} from "./favSaga"
+
 export default function* rootSaga() {
     yield all([
         authSaga(),
@@ -12,6 +14,7 @@ export default function* rootSaga() {
         restaurantSaga(),
         reviewSaga(),
         orderSaga(),
-        mapSaga()
+        mapSaga(),
+        favSaga()
     ])
 }

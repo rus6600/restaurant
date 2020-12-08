@@ -39,7 +39,7 @@ useEffect( () => {
 const settings = {
     dots: false,
     infinite: true,
-    speed: 700,
+    speed: 1100,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true
@@ -88,24 +88,6 @@ console.log(data)
                                 <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
                             </LinkContainer>
 
-
-
-
-
-
-                            <li className="nav-item"><a className="nav-link" href="menu.html">Menu</a></li>
-                            <li className="nav-item"><a className="nav-link" href="about.html">About</a></li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
-                                <div className="dropdown-menu" aria-labelledby="dropdown-a">
-                                    <a className="dropdown-item" href="reservation.html">Reservation</a>
-                                    <a className="dropdown-item" href="stuff.html">Stuff</a>
-                                    <a className="dropdown-item" href="gallery.html">Gallery</a>
-                                </div>
-                            </li>
-
-
-
                             <li>
 
 
@@ -130,8 +112,9 @@ console.log(data)
                     </div>
 
                     <div className="col-lg-6 col-md-6 special-grid lunch">
-                        <Card className="mb-2" style={{marginLeft: "50px", width: '18rem' }}>
+                        <Card className="mb-3" style={{marginLeft: "50px", width: '30rem' }}>
                             <Card.Body>
+
                                 <Card.Title>Адрес : {resto.location}</Card.Title>
                                 <Card.Title>Телефон : {resto.phone}</Card.Title>
                                 <Card.Title>Средний чек : {resto.averageBill}</Card.Title>
