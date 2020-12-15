@@ -47,7 +47,6 @@ const settings = {
 
 const resto = props.restaurantId
 
-console.log(resto)
 
     const data = props.restaurantId?.Reviews?.map((item, i) => {
             return (
@@ -64,7 +63,6 @@ console.log(resto)
         }
     )
 
-console.log(data)
 
 
 

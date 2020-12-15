@@ -122,7 +122,6 @@ function Order(props) {
 
     return (
         <div>
-        <Button onClick={() => setVisible(true)} style={{display: "block", marginBottom: 10}}>Add order</Button>
 
     <div>
             <Table columns={columns} dataSource={orders} />

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import logo from "../../Assets/images/DECODE-RGB.png";
 import {LinkContainer} from "react-router-bootstrap";
-import {Table, Tag, Space, Card, Meta, Rate, Button, Modal, Form, Input, Select} from 'antd';
+import {Table, Tag, Space, Card, Meta, Rate, Button, Modal, Form, Input, Select, DatePicker, Alert, notification } from 'antd';
 import { Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import {bindActionCreators} from "redux";
@@ -15,6 +15,8 @@ import ModalSignIn from "../../Components/Mainpage/modalSignIn";
 import ModalCheck from "../../Components/Mainpage/modal";
 import * as reviewActions from "../../actions/reviewActions";
 import fav from "../../reducers/favReducer";
+import Order from "../userInterface/Components/Order";
+import * as orderActions from "../../actions/orderActions";
 
 
 
@@ -27,12 +29,19 @@ function ListRestaurants(props) {
     const [showSignUp, setShowSignUp] = useState(false);
     const [showSignIn, setShowSignIn] = useState(false);
     const [visible,setVisible] = useState(false)
+    const [orderVisible, setOrderVisible] = useState(false)
     const [favVisible, setFavVisible] = useState(false)
     const [btnAdded, setBtnAdded] = useState(false)
     const [searchReq, setSearchReq] = useState("")
     const [search, setSearch] = useState({
         query: ``,
         page: 1
+    })
+    const [orderdata, setOrderData] = useState({
+        usedId: props.user.id,
+        restaurantId: "",
+        orderdate: "",
+        guest: ""
     })
 
 
@@ -53,6 +62,13 @@ function ListRestaurants(props) {
         }
         fetchData();
     }, [props.favActions])
+
+    useEffect( () => {
+        async function fetchData() {
+            await props.orderActions.getOrder();
+        }
+        fetchData();
+    }, [props.orderActions])
 
 
     // console.log(props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}))
@@ -98,6 +114,62 @@ function ListRestaurants(props) {
 
     }
 
+    const orderAdd = (item) => {
+        setOrderVisible(true)
+        setOrderData(prev => ({
+            ...prev,
+            restaurantId: item.id
+        }))
+    }
+
+    const orderHandler = () => {
+        setOrderVisible(false)
+        openOrderNotification()
+        props.orderActions.addOrder(orderdata);
+
+    }
+
+    const openOrderNotification = () => {
+        notification.open({
+            message: 'Спасибо',
+            description:
+                `Ваш заказ на ${orderdata.orderdate} успешно добавлен`,
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
+        });
+    };
+
+    function orderHandleChange(value, title) {
+        console.log(title)
+        setOrderData(prev => ({
+            ...prev,
+            [title.title]: value
+        }))}
+
+
+    const orderHandleChangeResto = (e,dateString) => {
+        const {value, name} = e.target;
+        setOrderData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    function onChangeDate(date, dateString) {
+        setOrderData(prev => ({
+            ...prev,
+            orderdate : dateString
+        }))    }
+
+
+
+    const restaurantsSelect = [];
+
+
+    const orderDateIndex = props.restaurant?.restaurants?.map((item) => {
+        restaurantsSelect.push(<div key={item.id} title="restaurantId">{item.name}</div>);
+    })
 
     const reviewHandler = (item) => {
         setVisible(true)
@@ -106,6 +178,18 @@ function ListRestaurants(props) {
             ...prev,
             restaurantId: item.id
         }))}
+
+    const openReviewNotification = () => {
+        notification.open({
+            message: 'Спасибо',
+            description:
+                "Ваш отзыв добавлен",
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
+        });
+    };
+
 
     const onChange = e => {
         const {value, name} = e.target;
@@ -117,11 +201,11 @@ function ListRestaurants(props) {
 
     const okHandler = () => {
         setVisible(false)
+        openReviewNotification()
         console.log(formdata)
         props.reviewActions.addReview(formdata);
 
     }
-
 
 
 
@@ -131,7 +215,6 @@ function ListRestaurants(props) {
             key: 'image',
             render: image =>
                 <Card
-                        hoverable
                         style={{width: 480 }}
                         cover={<img alt="example" src={`http://localhost:5000/${image}`} />}
                     >
@@ -142,15 +225,19 @@ function ListRestaurants(props) {
             key: 'item',
             render: item =>
                 <Card title={item.name} bordered={false}>
+
                     <p>Адрес : {item.location}</p>
                     <p>Телефон : {item.phone}</p>
                     <p>Средний чек : {item.averageBill}</p>
                     <p>Количество мест : {item.amountOfPlace}</p>
-
+                    <LinkContainer to={`/restaurants/${item.id}`}>
+                        <Button type="primary">На страницу ресторана</Button>
+                    </LinkContainer>
                     <p> {props.isAuth ?
                         <div>
 
                         <Button className={props.isAuth ? "btn" : "none"} type="primary" onClick={() => reviewHandler(item)}>Добавить отзыв</Button>
+                        <Button className={props.isAuth ? "btn" : "none"} type="primary" onClick={() => orderAdd(item)}>Добавить заказ</Button>
 
                             {
 
@@ -197,9 +284,11 @@ function ListRestaurants(props) {
                 <header className="top-navbar">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <div className="container">
-                            <a className="navbar-brand" href="index.html">
-                                <img  src={logo} alt="" />
-                            </a>
+                            <LinkContainer to="/">
+                                <a className="navbar-brand" href="index.html">
+                                    <img  src={logo} alt="" />
+                                </a>
+                            </LinkContainer>
                             <div>
                             <Input className="nav-input" onChange={searchHandler} placeholder="Введите название ресторана" />
                             </div>
@@ -209,9 +298,9 @@ function ListRestaurants(props) {
                                         <li className="nav-item active"><a className="nav-link">На главную</a></li>
                                     </LinkContainer>
 
-                                    <LinkContainer to="/cabinet/reviews">
-                                        <li className="nav-item active"><a className="nav-link">Отзывы</a></li>
-                                    </LinkContainer>
+                                    {/*<LinkContainer to="/cabinet/reviews">*/}
+                                    {/*    <li className="nav-item active"><a className="nav-link">Отзывы</a></li>*/}
+                                    {/*</LinkContainer>*/}
 
                                 </ul>
                                 <div className="input-wrapper">
@@ -227,7 +316,6 @@ function ListRestaurants(props) {
             </div>
 
 
-
             <div className="container" style={{paddingTop: "120px"}}>
 
                 <Table columns={columns} dataSource={data} />
@@ -235,7 +323,7 @@ function ListRestaurants(props) {
             </div>
 
             <Modal
-                title="Отзыв"
+                title="Добавьте ваш отзыв"
                 visible={visible}
                 onOk={okHandler}
                 onCancel={() => setVisible(false)}
@@ -269,6 +357,44 @@ function ListRestaurants(props) {
 
             </Modal>
 
+            <Modal
+                title="Добавить бронь"
+                visible={orderVisible}
+                onOk={orderHandler}
+                onCancel={() => setOrderVisible(false)}
+            >
+                <Form
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 14 }}
+                    layout="horizontal"
+                >
+                    <Form.Item
+                        label="Количество гостей"
+                        name="guest"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожалуйста введите название ресторана!',
+                            },
+                        ]}
+                    >
+                        <Input name="guest"  onChange={orderHandleChangeResto} />
+                    </Form.Item>
+                    <Form.Item
+                        label="Бронь на дату"
+                        name="orderdate"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожалуйста введите название ресторана!',
+                            },
+                        ]}
+                    >
+                        <DatePicker onChange={onChangeDate} />
+                    </Form.Item>
+                </Form>
+            </Modal>
+
         </div>
     )
 }
@@ -288,7 +414,9 @@ const mapDispatchToProps = dispatch => ({
     restaurantActions: bindActionCreators(restaurantActions, dispatch),
     kitchenActions: bindActionCreators(kitchenActions, dispatch),
     reviewActions: bindActionCreators(reviewActions, dispatch),
-    favActions: bindActionCreators(favActions, dispatch)
+    favActions: bindActionCreators(favActions, dispatch),
+    orderActions: bindActionCreators(orderActions, dispatch),
+
 
 })
 

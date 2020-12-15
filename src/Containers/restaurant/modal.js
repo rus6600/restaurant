@@ -92,7 +92,7 @@ const handleUploadChange = info => {
 };
 
 const okHandler = () => {
-    setModalVisible(false)
+    setVisible(false)
     console.log({...formdata, image, kitchens})
     props.restaurantActions.addRestaurant({...formdata, image, kitchens});
 

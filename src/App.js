@@ -11,14 +11,10 @@ import setAuthToken from "./utils/setAuthToken";
 import * as types from "./actions/types"
 import jwt_decode from "jwt-decode"
 import Dashboard from "./Containers/dashboard";
-import showRestaurant from "./Containers/restaurant/showRestaurant";
-import {Card, Col} from "antd";
-import UserInterface from "./Containers/userInterface";
 import Mainpage from "./Components/Mainpage";
 import setRole from "./utils/setRole";
 import ShowRestaurant from "./Containers/restaurant/showRestaurant";
-import Cabinet from "./Containers/userInterface/Components/Cabinet";
-import Review from "./Containers/userInterface/Components/Review";
+
 import ListRestaurants from "./Containers/restaurants";
 
 const store = configureStore()
@@ -55,8 +51,6 @@ function App() {
                     <Route exact path={'/signup'} component={SignUp}/>
                     <Route exact path={'/signin'} component={Signin}/>
                     <Route path={'/dashboard'} component={Dashboard}/>
-                    <Route path={'/user'} component={UserInterface}/>
-                    <Route path={'/cabinet'} component={Cabinet}/>
                     <Route path={'/restaurants'} component={ListRestaurants}/>
                 </Switch>
             </Router>

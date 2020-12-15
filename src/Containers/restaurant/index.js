@@ -259,11 +259,9 @@ function Restaurant(props) {
 
     return (
         <div>
-            <Button type="primary" style={{display: "block", marginBottom: 10}} onClick={modalVisibleHandler}>Добавить ресторан</Button>
+            <Button type="primary mt-3" style={{display: "block", marginBottom: 10}} onClick={modalVisibleHandler}>Добавить ресторан</Button>
             <Input onChange={searchHandler} style={{marginBottom: 20}} placeholder="Введите название ресторана" />
             <Table columns={columns} dataSource={data} />
-
-            <Pagination onChange={onChangePage} current={search.page} pageSize={2} total={Number(props.restaurant?.total)}/>
             <ModalResto visible={modalVisible} setVisible={setModalVisible}/>
 
             <Modal

@@ -75,9 +75,11 @@ return (
             <header className="top-navbar">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
-                        <a className="navbar-brand" href="index.html">
-                            <img  src={logo} alt="" />
-                        </a>
+                        <LinkContainer to="/">
+                            <a className="navbar-brand" href="index.html">
+                                <img  src={logo} alt="" />
+                            </a>
+                        </LinkContainer>
 
                         <div className="collapse navbar-collapse" id="navbars-rs-food">
 
@@ -90,11 +92,6 @@ return (
                                     <li className="nav-item active"><a className="nav-link" href="index.html">Рестораны</a></li>
                                 </LinkContainer>
 
-                                <LinkContainer to="/cabinet">
-
-                                    <li className={ props.role  === "user" ? "nav-item active" : "hide"}><a className={ props.role === "user" ? "nav-link" : "hide"} >Кабинет</a></li>
-
-                                </LinkContainer>
 
 
                                 <LinkContainer  to="/dashboard/restaurant">

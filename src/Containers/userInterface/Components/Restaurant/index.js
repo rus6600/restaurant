@@ -43,17 +43,20 @@ const data = props.restaurant?.restaurants?.map((item, i) => {
 
         return (
             <div key={i} >
+
                 <div className="card" >
-                    <img className="card-img-top" variant="top" src={`http://localhost:5000/${item.image}`} />
+                    <LinkContainer to={`/restaurants/${item.id}`}>
+                        <img className="card-img-top" variant="top" src={`http://localhost:5000/${item.image}`} />
+                    </LinkContainer>
                 </div>
 
                 <div className="card-body-text">
                     <LinkContainer to={`/restaurants/${item.id}`}>
                         <h1>{item.name}</h1>
                     </LinkContainer>
-                    <div className="card-title">{item.location}</div>
-                    <div className="card-title">{item.kitchens}</div>
-                    <div className="card-title">{item.phone}</div>
+                    <h2 className="card-title">{item.location}</h2>
+                    <h2 className="card-title">{item.kitchens}</h2>
+                    <h2 className="card-title">{item.phone}</h2>
                     <Rate disabled defaultValue={item.rate}/>
                 </div>
             </div>
