@@ -15,9 +15,6 @@ import showRestaurant from "./Containers/restaurant/showRestaurant";
 import {Card, Col} from "antd";
 import UserInterface from "./Containers/userInterface";
 import Mainpage from "./Components/Mainpage";
-import SimpleSlider from "./Components/slider";
-import Slider from "../src/Components/slider/Slider"
-import Mainpage2 from "./Components/Mainpage/mainpage2";
 import setRole from "./utils/setRole";
 import ShowRestaurant from "./Containers/restaurant/showRestaurant";
 import Cabinet from "./Containers/userInterface/Components/Cabinet";

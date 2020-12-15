@@ -165,9 +165,26 @@ button:focus{
 /*------------------------------------------------------------------
     HEADER
 -------------------------------------------------------------------*/
+
+
+
+
 .top-navbar{
 	position: relative;
 	z-index: 10;
+}
+
+
+.top-navbar .input-wrapper {
+    padding: 10px;
+    box-sizing: border-box;
+
+
+}
+
+.nav-input {
+    border-radius: 10px 10px;
+    width: 50vh;
 }
 
 .top-navbar .navbar{
@@ -199,6 +216,7 @@ button:focus{
 	background: #d65106;
 	color: #ffffff;
 	border-radius: 4px;
+    
 }
 
 .navbar-expand-lg .navbar-nav .dropdown-menu{
@@ -206,6 +224,7 @@ button:focus{
 	border-radius: 0px;
 	padding: 10px;
 	box-shadow: 2px 5px 6px rgba(0,0,0,0.5);
+
 }
 .navbar-expand-lg .navbar-nav .dropdown-menu a{
 	padding: 10px 10px;

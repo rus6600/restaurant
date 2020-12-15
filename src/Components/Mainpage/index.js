@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom"
-import Carousel from 'react-bootstrap/Carousel'
+import {Carousel, Nav, FormControl, Form, Button} from 'react-bootstrap'
 import {withRouter} from "react-router-dom"
 import { LinkContainer } from 'react-router-bootstrap'
 import {bindActionCreators} from "redux";
@@ -35,7 +35,6 @@ import SignUp from "../../Containers/signup/index"
 import UserRestaurant from "../../Containers/userInterface/Components/Restaurant/index"
 import ModalCheck from "../Mainpage/modal"
 import ModalSignIn from "./modalSignIn";
-import SimpleMap from "../../Components/RestoMap/index"
 import * as authActions from "../../actions/authActions";
 import Review from "../../Containers/userInterface/Components/Review";
 import Order from "../../Containers/userInterface/Components/Order/"
@@ -48,7 +47,6 @@ import Cabinet from "../../Containers/userInterface/Components/Cabinet";
 import ListRestaurants from "../../Containers/restaurants/index"
 
 
-
 function Mainpage(props) {
 
 const [visible,setVisible] = useState(false)
@@ -58,19 +56,6 @@ const [visibleDropDown, setVisibleDropDown]= useState(false)
 
 const handleSignUp = () => setShowSignUp(!showSignUp);
 const handleSignIn = () => setShowSignIn(!showSignIn);
-
-
-
-
-
-  const  settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
-    //
 
 
 
@@ -86,46 +71,48 @@ return (
         <ModalSignIn showSignIn={showSignIn} handleSignIn={handleSignIn}/>
 
         <div>
-        <header className="top-navbar">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container">
-                <a className="navbar-brand" href="index.html">
-                    <img  src={logo} alt="" />
-                </a>
 
-                <div className="collapse navbar-collapse" id="navbars-rs-food">
+            <header className="top-navbar">
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <div className="container">
+                        <a className="navbar-brand" href="index.html">
+                            <img  src={logo} alt="" />
+                        </a>
 
-                    <ul className="navbar-nav ml-auto">
-                        <LinkContainer to="/">
-                            <li className="nav-item active"><a className="nav-link" href="index.html">Главная</a></li>
-                        </LinkContainer>
+                        <div className="collapse navbar-collapse" id="navbars-rs-food">
 
-                        <LinkContainer to="/restaurants">
-                            <li className="nav-item active"><a className="nav-link" href="index.html">Рестораны</a></li>
-                        </LinkContainer>
+                            <ul className="navbar-nav ml-auto">
+                                <LinkContainer to="/">
+                                    <li className="nav-item active"><a className="nav-link" href="index.html">Главная</a></li>
+                                </LinkContainer>
 
-                        <LinkContainer to="/cabinet">
+                                <LinkContainer to="/restaurants">
+                                    <li className="nav-item active"><a className="nav-link" href="index.html">Рестораны</a></li>
+                                </LinkContainer>
 
-                        <li className={ props.role  === "user" ? "nav-item active" : "hide"}><a className={ props.role === "user" ? "nav-link" : "hide"} >Кабинет</a></li>
+                                <LinkContainer to="/cabinet">
 
-                        </LinkContainer>
+                                    <li className={ props.role  === "user" ? "nav-item active" : "hide"}><a className={ props.role === "user" ? "nav-link" : "hide"} >Кабинет</a></li>
+
+                                </LinkContainer>
 
 
-                        <LinkContainer  to="/dashboard/restaurant">
-                            <li className={ props.role  === "admin" ? "nav-item active" : "hide"}><a className={ props.role === "admin" ? "nav-link" : "hide"} >Админ</a></li>
-                        </LinkContainer>
-                            { props.isAuth ?
-                                <li className="nav-item"><a className="nav-link" onClick={() => props.authActions.signOut()}>Выйти</a></li>
-                                :
-                                <li className="nav-item"><a className="nav-link" onClick={() => handleSignUp()}>Войти</a></li>
-                            }
-                        <li>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+                                <LinkContainer  to="/dashboard/restaurant">
+                                    <li className={ props.role  === "admin" ? "nav-item active" : "hide"}><a className={ props.role === "admin" ? "nav-link" : "hide"} >Админ</a></li>
+                                </LinkContainer>
+                                { props.isAuth ?
+                                    <li className="nav-item"><a className="nav-link" onClick={() => props.authActions.signOut()}>Выйти</a></li>
+                                    :
+                                    <li className="nav-item"><a className="nav-link" onClick={() => handleSignUp()}>Войти</a></li>
+                                }
+                                <li>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
 
             <Carousel>
                 <Carousel.Item style={{maxHeight: "100vh"}}>
@@ -179,8 +166,6 @@ return (
                         <SecondMap className="slider-component"/>
 
                     </div>
-
-
 
                 </div>
 

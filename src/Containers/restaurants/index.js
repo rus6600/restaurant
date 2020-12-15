@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import logo from "../../Assets/images/DECODE-RGB.png";
 import {LinkContainer} from "react-router-bootstrap";
 import {Table, Tag, Space, Card, Meta, Rate, Button, Modal, Form, Input, Select} from 'antd';
+import { Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import {bindActionCreators} from "redux";
 import {withRouter} from "react-router-dom"
 import * as restaurantActions from "../../actions/restaurantActions";
@@ -26,6 +28,13 @@ function ListRestaurants(props) {
     const [showSignIn, setShowSignIn] = useState(false);
     const [visible,setVisible] = useState(false)
     const [favVisible, setFavVisible] = useState(false)
+    const [btnAdded, setBtnAdded] = useState(false)
+    const [searchReq, setSearchReq] = useState("")
+    const [search, setSearch] = useState({
+        query: ``,
+        page: 1
+    })
+
 
     const handleSignUp = () => setShowSignUp(!showSignUp);
     const handleSignIn = () => setShowSignIn(!showSignIn);
@@ -46,15 +55,15 @@ function ListRestaurants(props) {
     }, [props.favActions])
 
 
-    console.log(props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}))
-
-    const check = props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}).filter(item=> item === true).length > 0
-
-    console.log(props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}).filter(item=> item === true).length > 0)
-
-    if (check.length > 0) {
-        console.log("Nigga!!!")
-    }
+    // console.log(props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}))
+    //
+    // const check = props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}).filter(item=> item === true).length > 0
+    //
+    // console.log(props.favorites?.map((item,i) => {return (item.Restaurant.name).includes("МЯТА FOOD")}).filter(item=> item === true).length > 0)
+    //
+    // if (check.length > 0) {
+    //     console.log("Nigga!!!")
+    // }
 
     const [formdata, setFormData] = useState({
         text: "",
@@ -65,6 +74,12 @@ function ListRestaurants(props) {
         userId: 4,
         restaurantId: 79
     })
+
+
+    const searchHandler = (e) => {
+        setSearchReq(e.target.value)
+        props.restaurantActions.getRestaurants({query: e.target.value, page: search.page})
+    }
 
 
     const favHandler = (item) => {
@@ -78,6 +93,7 @@ function ListRestaurants(props) {
 
     const favOkHandler = () => {
         setFavVisible(false)
+        setBtnAdded(true)
         props.favActions.addFavorite(favorite)
 
     }
@@ -109,7 +125,6 @@ function ListRestaurants(props) {
 
 
 
-
     const columns = [
         {
             dataIndex: 'image',
@@ -135,24 +150,19 @@ function ListRestaurants(props) {
                     <p> {props.isAuth ?
                         <div>
 
-                        <Button className={props.isAuth ? "btn" : "none"} onClick={() => reviewHandler(item)}>Добавить отзыв</Button>
+                        <Button className={props.isAuth ? "btn" : "none"} type="primary" onClick={() => reviewHandler(item)}>Добавить отзыв</Button>
 
                             {
 
                                 props.favorites?.map((favitem,i) => {return (favitem.Restaurant.name).includes(item.name)}).filter(item=> item === true).length > 0 ?
 
-                                    <Button className="btn">Вы добавили в избранные</Button>
+                                    <Switch defaultChecked={true} disabled={true} checkedChildren="added" unCheckedChildren="add fav"/>
 
                                     :
 
-                                    <Button className={props.isAuth ? "btn" : "none"} onClick={() => favHandler(item)}>Добавить в избранные</Button>
+                                    <Switch checkedChildren="added" unCheckedChildren="add fav" onChange={() => favHandler(item)}/>
 
                             }
-
-
-
-
-
                         </div>
                         :
                         <Button className={props.isAuth ? "btn" : "none"} onClick={() => handleSignUp()}>Войдите в систему</Button>
@@ -179,14 +189,6 @@ function ListRestaurants(props) {
         }
     })
 
-
-
-
-
-
-
-
-
     return (
         <div>
             <ModalCheck showSignUp={showSignUp} handleSignUp={handleSignUp} handleSignIn={handleSignIn} setShowSignIn={setShowSignIn} setShowSignUp={setShowSignUp}/>
@@ -198,12 +200,11 @@ function ListRestaurants(props) {
                             <a className="navbar-brand" href="index.html">
                                 <img  src={logo} alt="" />
                             </a>
-                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"></span>
-                            </button>
+                            <div>
+                            <Input className="nav-input" onChange={searchHandler} placeholder="Введите название ресторана" />
+                            </div>
                             <div className="collapse navbar-collapse" id="navbars-rs-food">
                                 <ul className="navbar-nav ml-auto">
-
                                     <LinkContainer to="/">
                                         <li className="nav-item active"><a className="nav-link">На главную</a></li>
                                     </LinkContainer>
@@ -212,16 +213,20 @@ function ListRestaurants(props) {
                                         <li className="nav-item active"><a className="nav-link">Отзывы</a></li>
                                     </LinkContainer>
 
-                                    <li>
-
-
-                                    </li>
                                 </ul>
+                                <div className="input-wrapper">
+                                </div>
                             </div>
                         </div>
+
                     </nav>
+
                 </header>
+
+
             </div>
+
+
 
             <div className="container" style={{paddingTop: "120px"}}>
 

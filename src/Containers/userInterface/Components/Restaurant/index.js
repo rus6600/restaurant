@@ -52,6 +52,7 @@ const data = props.restaurant?.restaurants?.map((item, i) => {
                         <h1>{item.name}</h1>
                     </LinkContainer>
                     <div className="card-title">{item.location}</div>
+                    <div className="card-title">{item.kitchens}</div>
                     <div className="card-title">{item.phone}</div>
                     <Rate disabled defaultValue={item.rate}/>
                 </div>

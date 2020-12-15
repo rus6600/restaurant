@@ -18,7 +18,7 @@ function* addFavorite(action) {
     try {
         const favResponse = yield axios.post("http://localhost:5000/api/favorite", data).then(res => res.data);
         yield put({type: types.ADD_FAVORITE_SUCCESS, payload:favResponse});
-        getFavorites()
+        yield getFavorites()
     } catch(error) {
         yield put({type: types.ADD_FAVORITE_FAILED, error})
     }

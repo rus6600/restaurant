@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 
 function EditModalResto(props) {
 
-
+    const {restoIdData} = props
     const {visible, setVisible, restoId} = props
 
     const { Option } = Select;
@@ -29,6 +29,7 @@ function EditModalResto(props) {
     })
 
     const { Meta } = Card;
+
 
     const  getBase64 = (img, callback) => {
         const reader = new FileReader();
@@ -94,7 +95,6 @@ function EditModalResto(props) {
     }
 
 
-console.log(id)
 
     const onChange = e => {
 
@@ -141,7 +141,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name="name"  onChange={onChange} />
+                    <Input name="name"  value={props.restaurantId.name} onChange={onChange} />
                 </Form.Item>
                 <Form.Item
                     label="Адрес"
@@ -152,7 +152,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name="location"  onChange={onChange}/>
+                    <Input name="location" value={props.restaurantId.location} onChange={onChange}/>
                 </Form.Item>
                 <Form.Item
                     label="Телефоный номер"
@@ -163,7 +163,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name="phone"  onChange={onChange}/>
+                    <Input name="phone" value={props.restaurantId.phone} onChange={onChange}/>
                 </Form.Item>
                 <Form.Item
                     label="Количество мест"
@@ -174,7 +174,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name= "amountOfPlace"   onChange={onChange} />
+                    <Input name= "amountOfPlace" value={props.restaurantId.amountOfPlace}   onChange={onChange} />
                 </Form.Item>
                 <Form.Item
                     label="Средний чек"
@@ -185,7 +185,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name="averageBill"   onChange={onChange} />
+                    <Input name="averageBill"  value={props.restaurantId.averageBill} onChange={onChange} />
                 </Form.Item>
                 <Form.Item
                     label="Кухня"
@@ -200,7 +200,7 @@ console.log(id)
                         mode="multiple"
                         allowClear
                         style={{ width: '100%' }}
-                        placeholder= "123"
+                        placeholder= "Выберите новую кухню"
                         onChange={handleChange}
                     >
                         {children}
@@ -215,7 +215,7 @@ console.log(id)
                         },
                     ]}
                 >
-                    <Input name="rate" onChange={onChange} />
+                    <Input name="rate" value={props.restaurantId.rate} onChange={onChange} />
                 </Form.Item>
                 <Form.Item
                     label="Фото"
